@@ -37,7 +37,8 @@ export default (req, res, next) => {
       store.dispatch(hydrate({
         group: req.group,
         subscriptions: req.subscriptions,
-        jwtExpired: req.jwtExpired
+        jwtExpired: req.jwtExpired,
+        transactionFilter: req.transactionFilter
       }));
 
       const initialState = serialize(store.getState());

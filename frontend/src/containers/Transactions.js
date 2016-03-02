@@ -22,7 +22,7 @@ export class Transactions extends Component {
       group,
       transactions,
       users,
-      type
+      transactionFilter
     } = this.props;
 
     return (
@@ -49,7 +49,7 @@ export class Transactions extends Component {
             <div className='Widget-label'>Available funds</div>
           </div>
 
-          <h2>All {type}s</h2>
+          <h2>All {transactionFilter}s</h2>
           <div className='PublicGroup-transactions'>
             {(transactions.length === 0) && (
               <div className='PublicGroup-emptyState'>
@@ -57,7 +57,7 @@ export class Transactions extends Component {
                   <Icon type='expense' />
                 </div>
                 <label>
-                  All {type}s will show up here
+                  All {transactionFilter}s will show up here
                 </label>
               </div>
             )}
@@ -77,14 +77,16 @@ export class Transactions extends Component {
       group,
       fetchTransactions,
       fetchUsers,
-      type
+      transactionFilter
     } = this.props;
 
     var options = {
       sort: 'createdAt',
       direction: 'desc'
     };
-    options[type] = true;
+    if (transactionFilter === 'donation' || transactionFilter === 'expense') {
+      options[transactionFilter] = true;
+    }
 
     fetchTransactions(group.id, options);
 
@@ -116,6 +118,9 @@ function mapStateToProps({
     session,
     group,
     transactions: sortBy(transactions, txn => txn.createdAt).reverse(),
-    users
+    users,
+    transactionFilter: transactions.transactionFilter
+      ? transactions.transactionFilter
+      : 'transaction'
   };
 }

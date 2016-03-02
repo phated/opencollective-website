@@ -113,4 +113,19 @@ const addMeta = (req, res, next) => {
   next();
 };
 
-export default { fetchGroupBySlug, fetchSubscriptionsByUserWithToken, fetchUsers, ga, addMeta, cache}
+const addTransactionFilter = (req, res, next) => {
+  if (req.query.type) {
+    req.transactionFilter = req.query.type;
+  }
+  next();
+}
+
+export default {
+  fetchGroupBySlug,
+  fetchSubscriptionsByUserWithToken,
+  fetchUsers,
+  ga,
+  addMeta,
+  cache,
+  addTransactionFilter
+}
