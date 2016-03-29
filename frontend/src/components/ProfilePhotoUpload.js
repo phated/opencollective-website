@@ -8,5 +8,8 @@ export default (props) => {
     uploading: () => <ProfilePhoto url={props.value} size='110px' spinner='yes'/>
   };
 
-  return <ImageUpload {...props} {...states} customClassName='ProfilePhotoUpload'/>;
+  return <ImageUpload
+    {...props}
+    {...states} 
+    customClassName='ProfilePhotoUpload'/>;
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Input from '../components/Input';
 import SaveButton from '../components/SaveButton';
+import ProfilePhotoUpload from './ProfilePhotoUpload';
 
 
 export class PublicGroupSignup extends Component {
@@ -19,6 +20,11 @@ export class PublicGroupSignup extends Component {
         <h2>Thanks for the support </h2>
         <p>How should we show you on the page? </p>
 
+        <div className='Label'> Avatar: </div>
+        <ProfilePhotoUpload
+          {...this.props}
+          value={profileForm.attributes.avatar || newUser.avatar}
+          onFinished={avatar => appendProfileForm({avatar})} />
         <div className='Label'> Display Name: </div>
         <Input
           type='text'

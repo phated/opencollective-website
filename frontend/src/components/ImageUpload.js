@@ -38,13 +38,14 @@ class ImageUpload extends Component {
     let imgsrc = '/static/images/uploading.png';
     let label = 'Upload receipt (photo or PDF)';
 
-    if (value) {
-      if(value.match(/\.pdf$/)) {
+    if (value && value.url) {
+      console.log("value.url", value.url);
+      if(value.url.match(/\.pdf$/)) {
         imgsrc = '/static/images/mime-pdf.png';
         label = file.name;
       }
       else {
-        imgsrc = value;
+        imgsrc = value.url;
         label = ''
         className = 'imagePreview';
       }
@@ -90,8 +91,8 @@ class ImageUpload extends Component {
 ImageUpload.propTypes = {
   onFinished: PropTypes.func.isRequired,
   uploadImage: PropTypes.func.isRequired,
-  isUploading: PropTypes.bool.isRequired,
-  value: PropTypes.string,
+  isUploading: PropTypes.bool,
+  value: PropTypes.string
 };
 
 

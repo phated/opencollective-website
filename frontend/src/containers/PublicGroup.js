@@ -13,7 +13,7 @@ import roles from '../constants/roles';
 import PublicTopBar from '../containers/PublicTopBar';
 import Notification from '../containers/Notification';
 import PublicFooter from '../components/PublicFooter';
-import PublicGroupThanks from '../components/PublicGroupThanks';
+import PublicGroupAfterDonation from '../components/PublicGroupAfterDonation';
 import TransactionItem from '../components/TransactionItem';
 import Media from '../components/Media';
 import Metric from '../components/Metric';
@@ -35,6 +35,7 @@ import appendProfileForm from '../actions/form/append_profile';
 import updateUser from '../actions/users/update';
 import validateSchema from '../actions/form/validate_schema';
 import decodeJWT from '../actions/session/decode_jwt';
+import uploadImage from '../actions/images/upload';
 
 import profileSchema from '../joi_schemas/profile';
 
@@ -60,7 +61,7 @@ export class PublicGroup extends Component {
     } = this.props;
 
     if (this.state.showThankYouMessage || (isAuthenticated && this.state.showUserForm) || showPaypalThankYou) { // we don't handle userform from logged in users) {
-      return <PublicGroupThanks />;
+      return <PublicGroupAfterDonation />;
     } else if (this.state.showUserForm) {
       return <PublicGroupSignup {...this.props} save={saveNewUser.bind(this)} />
     } else {
@@ -341,7 +342,8 @@ export default connect(mapStateToProps, {
   updateUser,
   validateSchema,
   decodeJWT,
-  appendDonationForm
+  appendDonationForm,
+  uploadImage
 })(PublicGroup);
 
 function mapStateToProps({
